@@ -1,0 +1,14 @@
+<div 
+  class="box" 
+  [ngClass]="{'selected': box.isSelected}" 
+  [style.borderColor]="box.isSelected ? box.color : 'transparent'">
+  <div class="box-content">
+    <h3>{{ box.title }}</h3>
+    <p>
+      {{ box.content }}
+    </p>
+    <button class="color-button" (click)="onButtonClick($event)" [ngStyle]="{'background-color': box.color}">
+      Set {{ box.color }}
+    </button>
+  </div>
+</div>

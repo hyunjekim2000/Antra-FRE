@@ -1,0 +1,7 @@
+<div class="box-list">
+  <app-box 
+    *ngFor="let box of boxes" 
+    [box]="box" 
+    (selectBox)="onBoxSelected(box)">
+  </app-box>
+</div>

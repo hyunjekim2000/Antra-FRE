@@ -1,0 +1,47 @@
+.box {
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid transparent; 
+  border-radius: 15px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.box-content {
+  padding: 0 20px 20px 20px;
+}
+
+.box.selected {
+  box-shadow: 0 0 10px currentColor;
+  border-right: 8px solid currentColor;
+  border-bottom: 8px solid currentColor;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-color: currentColor;
+}
+
+.color-button {
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.button {
+  border: 0px solid transparent;
+  border-radius: 15px;
+}
+
+.color-button {
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  width: 100px;
+}
