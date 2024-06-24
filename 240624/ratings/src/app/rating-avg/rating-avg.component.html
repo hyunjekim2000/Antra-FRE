@@ -1,0 +1,7 @@
+<div class="ratings__average">
+  <h3>Average Rating:</h3>
+  <p class="stars">
+    <span *ngFor="let star of stars" [ngClass]="star">&#9733;</span>
+    <span *ngFor="let star of emptyStars" [ngClass]="star">&#9734;</span>
+  </p>
+</div>

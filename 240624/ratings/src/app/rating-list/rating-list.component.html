@@ -1,0 +1,10 @@
+<div>
+  <app-rating-avg [ratings]="ratings"></app-rating-avg>
+  <div *ngFor="let rating of ratings">
+    <app-rating-indiv 
+      [name]="rating.name" 
+      [content]="rating.content" 
+      [rate]="rating.rate">
+    </app-rating-indiv>
+  </div>
+</div>

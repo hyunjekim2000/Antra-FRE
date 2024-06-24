@@ -1,0 +1,8 @@
+<div class="ratings__item">
+  <p class="stars">
+    <span *ngFor="let star of stars" [ngClass]="star">&#9733;</span>
+    <span *ngFor="let star of emptyStars" [ngClass]="star">&#9734;</span>
+  </p>
+  <p class="name">{{ name }}</p>
+  <p class="content">{{ content }}</p>
+</div>

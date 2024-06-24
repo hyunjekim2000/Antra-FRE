@@ -1,0 +1,20 @@
+.ratings__average {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.ratings__average h3 {
+  font-size: 1.2em;
+  margin: 0 0 5px 0;
+  font-weight: bold;
+  color: blue;
+}
+
+.ratings__average .stars {
+  margin: 5px 0;
+}
+
+.filled, .empty {
+  font-size: 1.5em;
+  margin-right: 2px;
+}

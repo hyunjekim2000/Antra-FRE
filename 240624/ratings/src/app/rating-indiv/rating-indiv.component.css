@@ -1,0 +1,30 @@
+.ratings__item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.ratings__item h3 {
+  font-size: 1.2em;
+  margin: 0 0 5px 0;
+  font-weight: bold;
+  color: blue;
+}
+
+.ratings__item .stars {
+  margin: 5px 0;
+}
+
+.ratings__item .name {
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.ratings__item .content {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.filled, .empty {
+  font-size: 1.5em;
+  margin-right: 2px;
+}
