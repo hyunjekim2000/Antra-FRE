@@ -1,0 +1,6 @@
+<div>
+  <input type="text" [(ngModel)]="input" (input)="onSearchChange(input)" placeholder="Search cities">
+  <ul *ngIf="autocomplete.length > 0">
+    <li *ngFor="let city of autocomplete">{{ city }}</li>
+  </ul>
+</div>
