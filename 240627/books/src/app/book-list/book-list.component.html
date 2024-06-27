@@ -1,0 +1,14 @@
+<div class="container">
+  <input [formControl]="searchControl" placeholder="Search book" class="search-bar" />
+  <div class="book-list">
+    <div *ngFor="let book of books" class="book-card">
+      <img *ngIf="book.volumeInfo.imageLinks" [src]="book.volumeInfo.imageLinks.thumbnail" alt="{{book.volumeInfo.title}}" />
+      <div class="book-info">
+        <h2>{{ book.volumeInfo.title }}</h2>
+        <p><strong>Publisher:</strong> {{ book.volumeInfo.publisher }}</p>
+        <p><strong>Publish Date:</strong> {{ book.volumeInfo.publishedDate }}</p>
+        <p>{{ book.volumeInfo.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
