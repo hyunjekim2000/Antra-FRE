@@ -1,0 +1,15 @@
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  background-color: #000;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.loading-indicator {
+  text-align: center;
+  padding: 20px;
+  color: white;
+}

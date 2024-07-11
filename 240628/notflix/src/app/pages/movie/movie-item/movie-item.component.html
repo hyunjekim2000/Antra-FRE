@@ -1,0 +1,14 @@
+<div class="movie-item">
+  <div class="background" [ngStyle]="{'background-image': 'url(' + getPosterUrl(movie.poster_path) + ')'}"></div>
+  <img [src]="getPosterUrl(movie.poster_path)" alt="{{ movie.title }}" class="poster">
+  <div class="details">
+    <h3>{{ movie.title }}</h3>
+    <div class="movie-info">
+      <span class="year">{{ movie.release_date | date:'yyyy' }}</span>
+      <span class="language">EN</span>
+      <span class="rating">{{ movie.vote_average | number:'1.1-1' }}</span>
+    </div>
+    <p class="overview">{{ movie.overview }}</p>
+    <button class="details-button">More Details</button>
+  </div>
+</div>
