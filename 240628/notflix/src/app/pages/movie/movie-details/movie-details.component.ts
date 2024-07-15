@@ -37,13 +37,13 @@ export class MovieDetailsComponent implements OnInit {
       this.movieService.getMovieVideos(movieId).subscribe((videos: any[]) => {
         const trailer = videos.find(video => video.type === 'Trailer' && video.site === 'YouTube');
         if (trailer) {
-          this.trailerUrl = trailer.key; // Just extract the video key
+          this.trailerUrl = trailer.key;
         }
         console.log('Trailer URL: ', this.trailerUrl);
       });
 
       this.movieService.getMoviePosters(movieId).subscribe((posters: Poster[]) => {
-        this.posters = posters.slice(0, 5); // Get the first 5 posters
+        this.posters = posters;
         console.log('Posters: ', this.posters);
       });
     }
