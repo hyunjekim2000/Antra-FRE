@@ -1,0 +1,43 @@
+<div *ngIf="movie">
+  <div class="background" [ngStyle]="{'background-image': 'url(' + getBackdropUrl(movie.backdrop_path) + ')'}"></div>
+  <div class="details-container">
+    <div class="left-section">
+      <h1>{{ movie.title }}</h1>
+      <p>{{ movie.overview }}</p>
+      <div class="additional-info">
+        <span>Rating: {{ movie.vote_average }}</span>
+        <span>Release Date: {{ movie.release_date }}</span>
+        <div *ngIf="movie.homepage">
+          <span>Home Page: <a [href]="movie.homepage" target="_blank">{{ movie.homepage }}</a></span>
+        </div>
+      </div>
+      <div class="trailer-section" *ngIf="trailerUrl">
+        <button class="watch-trailer" (click)="openTrailer()">Watch Trailer</button>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="posters-section">
+        <h2>Posters</h2>
+        <div class="posters">
+          <img *ngFor="let poster of posters" [src]="getPosterUrl(poster.file_path)" />
+        </div>
+      </div>
+      <div class="actors-section">
+        <h2>Cast</h2>
+        <div class="actors">
+          <div *ngFor="let actor of cast">
+            <img [src]="getActorProfileUrl(actor.profile_path)" alt="{{ actor.name }}">
+            <span>{{ actor.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" *ngIf="showTrailerModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeTrailerModal()">&times;</span>
+    <youtube-player [videoId]="trailerUrl"></youtube-player>
+  </div>
+</div>

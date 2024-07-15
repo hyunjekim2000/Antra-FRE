@@ -5,87 +5,96 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   color: #fff;
-  height: 350px;
+  height: 330px;
 
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
+}
 
-  .background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.4);
-    z-index: 0;
-  }
+.movie-item .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4);
+  z-index: 0;
+}
 
-  .poster {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 100px;
-    height: auto;
-    border: 2px solid #fff;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
+.movie-item .poster {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 100px;
+  height: auto;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
 
-  .details {
-    position: relative;
-    z-index: 2;
-    padding: 16px;
-    padding-top: 180px;
+.movie-item .details {
+  position: relative;
+  z-index: 2;
+  padding: 16px;
+  padding-top: 180px;
+}
 
-    h3 {
-      margin: 0 0 8px;
-      font-size: 1.2rem;
-    }
+.movie-item .details h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-    .movie-info {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
+.movie-item .details .movie-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
-      span {
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 0.8rem;
-      }
+.movie-item .details .movie-info span {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
 
-      .year, .language, .rating {
-        background: maroon;
-      }
-    }
+.movie-item .details .movie-info .year,
+.movie-item .details .movie-info .language,
+.movie-item .details .movie-info .rating {
+  background: maroon;
+}
 
-    .overview {
-      margin: 8px 0;
-      font-size: 0.7rem;
-      font-style: italic;
-      height: 35px;
-      overflow: hidden;
-    }
+.movie-item .details .overview {
+  margin: 8px 0;
+  font-size: 0.7rem;
+  font-style: italic;
+  height: 2.4em;
+  line-height: 1.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
 
-    .details-button {
-      position: absolute;
-      background: transparent;
-      border: 1px solid #fff;
-      left: 15px;
-      top: 300px;
-      border-radius: 4px;
-      padding: 8px 16px;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.2s;
+.movie-item .details button {
+  background: transparent;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin-top: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
 
-      &:hover {
-        background: rgba(255, 255, 255, 0.4);
-      }
-    }
-  }
+.movie-item .details button:hover {
+  background: rgba(255, 255, 255, 0.4);
 }

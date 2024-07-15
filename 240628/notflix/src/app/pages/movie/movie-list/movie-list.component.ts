@@ -1,37 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.scss']
+  styleUrl: './movie-list.component.scss'
 })
-export class MovieListComponent implements OnInit {
+export class MovieListComponent implements OnInit, AfterViewInit {
   movies: Movie[] = [];
   page = 1;
   loading = false;
+  finished = false;
 
   constructor(private movieService: MovieService) {}
 
   ngOnInit() {
-    console.log('MovieListComponent initialized');
     this.loadMovies();
   }
 
+  ngAfterViewInit() {
+    this.addManualScrollEventListener();
+  }
+
   loadMovies() {
-    if (this.loading) {
+    if (this.loading || this.finished) {
+      console.log('Already loading or finished, skipping loadMovies call.');
       return;
     }
     this.loading = true;
+    console.log('Loading movies for page:', this.page);
     this.movieService.getMovies(this.page).subscribe({
       next: (data: Movie[]) => {
+        if (data.length === 0) {
+          this.finished = true;
+        }
         this.movies = [...this.movies, ...data];
         this.loading = false;
-        console.log('Movies loaded:', this.movies);
+        console.log('Loaded movies:', data);
       },
       error: (error) => {
-        console.error('Failed to load movies:', error);
+        console.error('Error loading movies:', error);
         this.loading = false;
       }
     });
@@ -39,7 +48,22 @@ export class MovieListComponent implements OnInit {
 
   onScroll() {
     console.log('Scroll event triggered');
-    this.page++;
-    this.loadMovies();
+    if (!this.loading && !this.finished) {
+      this.page++;
+      this.loadMovies();
+    } else {
+      console.log('Ignoring scroll event, loading:', this.loading, 'finished:', this.finished);
+    }
+  }
+
+  addManualScrollEventListener() {
+    const scrollContainer = document.querySelector('.scroll-container');
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', this.manualScrollEvent);
+    }
+  }
+
+  manualScrollEvent = () => {
+    console.log('Manual scroll event detected');
   }
 }

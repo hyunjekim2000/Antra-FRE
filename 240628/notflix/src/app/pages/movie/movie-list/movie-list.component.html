@@ -1,10 +1,13 @@
-<div class="movie-list"
+<div class="scroll-container"
     infiniteScroll
     [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50"
+    [scrollWindow]="false"
     (scrolled)="onScroll()">
-  <app-movie-item *ngFor="let movie of movies" [movie]="movie"></app-movie-item>
-</div>
-<div *ngIf="loading" class="loading-indicator">
-  Loading...
+  <div class="movie-list">
+    <app-movie-item *ngFor="let movie of movies" [movie]="movie"></app-movie-item>
+  </div>
+  <div *ngIf="loading" class="loading-indicator">
+    Loading...
+  </div>
 </div>

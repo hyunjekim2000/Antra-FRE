@@ -18,8 +18,10 @@ import { SignupStep1Component } from './pages/signup-step1/signup-step1.componen
 import { SignupStep2Component } from './pages/signup-step2/signup-step2.component';
 import { MovieItemComponent } from './pages/movie/movie-item/movie-item.component';
 import { MovieListComponent } from './pages/movie/movie-list/movie-list.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { MovieDetailsComponent } from './pages/movie/movie-details/movie-details.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { SafePipe } from './pages/movie/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -37,13 +39,16 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     SignupStep2Component,
     MovieItemComponent,
     MovieListComponent,
+    MovieDetailsComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    InfiniteScrollModule
+    InfiniteScrollDirective,
+    YouTubePlayerModule
   ],
   providers: [
     provideClientHydration()

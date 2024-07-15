@@ -9,6 +9,6 @@
       <span class="rating">{{ movie.vote_average | number:'1.1-1' }}</span>
     </div>
     <p class="overview">{{ movie.overview }}</p>
-    <button class="details-button">More Details</button>
+    <button (click)="goToDetails(movie.id)" class="more-details-button">More Details</button>
   </div>
 </div>
