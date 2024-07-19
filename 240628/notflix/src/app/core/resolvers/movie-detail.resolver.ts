@@ -11,7 +11,7 @@ export class MovieDetailResolver implements Resolve<Movie> {
   constructor(private movieService: MovieService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Movie> {
-    console.log('resolver running...')
+    // console.log('resolver running...')
     const id = route.paramMap.get('id');
     return this.movieService.getMovieDetails(id!);
   }

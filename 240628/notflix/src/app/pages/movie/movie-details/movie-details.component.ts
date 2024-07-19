@@ -27,7 +27,7 @@ export class MovieDetailsComponent implements OnInit {
 
       this.movieService.getMovieCredits(this.movie.id.toString()).subscribe((credits: Cast[]) => {
         this.cast = credits;
-        console.log('Credits: ', this.cast);
+        // console.log('Credits: ', this.cast);
       });
 
       this.movieService.getMovieVideos(this.movie.id.toString()).subscribe((videos: any[]) => {
@@ -35,12 +35,12 @@ export class MovieDetailsComponent implements OnInit {
         if (trailer) {
           this.trailerUrl = trailer.key;
         }
-        console.log('Trailer URL: ', this.trailerUrl);
+        // console.log('Trailer URL: ', this.trailerUrl);
       });
 
       this.movieService.getMoviePosters(this.movie.id.toString()).subscribe((posters: Poster[]) => {
         this.posters = posters;
-        console.log('Posters: ', this.posters);
+        // console.log('Posters: ', this.posters);
       });
     });
   }

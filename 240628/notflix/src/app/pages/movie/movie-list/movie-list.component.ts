@@ -17,6 +17,8 @@ export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   finished = false;
   private scrollPositionKey = 'movie-list-scroll-position';
   private notifier = new Subject();
+  private scrollRestored = false;
+  private savedScrollPosition = 0;
 
   constructor(
     private movieService: MovieService,
@@ -25,7 +27,18 @@ export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.loadMovies();
+    this.savedScrollPosition = this.scrollService.getPosition(this.scrollPositionKey)[0];
+
+    this.movieService.getSavedMovies().subscribe(movies => {
+      this.movies = movies;
+      this.page = this.movieService.getCurrentPage();
+      this.finished = this.movieService.isFinished();
+      if (this.movies.length === 0) {
+        this.loadMovies();
+      } else {
+        this.attemptRestoreScrollPosition();
+      }
+    });
 
     this.router.events
       .pipe(filter((event) => event instanceof NavigationStart), takeUntil(this.notifier))
@@ -37,22 +50,23 @@ export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd), takeUntil(this.notifier))
       .subscribe(() => {
-        console.log('NavigationEnd - restoring scroll position');
-        this.restoreScrollPosition();
+        console.log('NavigationEnd - attempting to restore scroll position');
+        this.attemptRestoreScrollPosition();
       });
   }
 
   ngAfterViewInit() {
     this.addManualScrollEventListener();
     setTimeout(() => {
-      console.log('ngAfterViewInit - restoring scroll position');
-      this.restoreScrollPosition();
+      console.log('ngAfterViewInit - attempting to restore scroll position');
+      this.attemptRestoreScrollPosition();
     }, 50);
   }
 
   ngOnDestroy() {
     console.log('ngOnDestroy - saving scroll position');
     this.saveScrollPosition();
+    this.movieService.saveState(this.movies, this.page, this.finished);
     this.notifier.next(null);
     this.notifier.complete();
   }
@@ -70,7 +84,10 @@ export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.movies = [...this.movies, ...data];
         this.loading = false;
         this.checkScroll();
-        this.restoreScrollPosition();
+        if (!this.scrollRestored && this.savedScrollPosition > 0) {
+          this.attemptRestoreScrollPosition();
+        }
+        this.movieService.saveState(this.movies, this.page, this.finished);
       },
       error: (error) => {
         this.loading = false;
@@ -126,12 +143,18 @@ export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  restoreScrollPosition() {
-    const scrollContainer = document.querySelector('.scroll-container');
-    if (scrollContainer) {
-      const [vertical, horizontal] = this.scrollService.getPosition(this.scrollPositionKey);
-      console.log('Restoring scroll position to:', vertical);
-      scrollContainer.scrollTo({ top: vertical, behavior: 'auto' });
-    }
+  attemptRestoreScrollPosition() {
+    const interval = setInterval(() => {
+      const scrollContainer = document.querySelector('.scroll-container');
+      if (scrollContainer) {
+        const [vertical] = this.scrollService.getPosition(this.scrollPositionKey);
+        console.log('Attempting to restore scroll position to:', vertical);
+        if (scrollContainer.scrollHeight > vertical) {
+          scrollContainer.scrollTo({ top: vertical, behavior: 'auto' });
+          this.scrollRestored = true;
+          clearInterval(interval);
+        }
+      }
+    }, 100);
   }
 }
