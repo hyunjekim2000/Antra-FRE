@@ -1,0 +1,74 @@
+.signup-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.plan-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.plan {
+  margin-bottom: 10px;
+}
+
+label {
+  margin-left: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label {
+  display: block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #e50914;
+  color: #fff;
+  border-color: #e50914;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+.error {
+  color: #e50914;
+  font-size: 14px;
+  margin-top: 5px;
+}

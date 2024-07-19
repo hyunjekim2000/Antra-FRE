@@ -1,4 +1,8 @@
 <header class="home-header">
   <img src="assets/home/netflix_icon_logo.png" alt="Notflix Logo" class="logo" (click)="goToHome()">
-  <button class="sign-in-button" (click)="goToLogin()">Sign In</button>
+  <div *ngIf="isLogin" class="user-info">
+    <span>{{ username }}</span>
+    <button class="sign-out-button" (click)="signOut()">Sign Out</button>
+  </div>
+  <button *ngIf="!isLogin" class="sign-in-button" (click)="goToLogin()">Sign In</button>
 </header>

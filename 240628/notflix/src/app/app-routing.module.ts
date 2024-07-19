@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login/login.component';
-import { SignupStep1Component } from './pages/signup-step1/signup-step1.component';
-import { SignupStep2Component } from './pages/signup-step2/signup-step2.component';
-import { MovieListComponent } from './pages/movie/movie-list/movie-list.component';
-import { MovieDetailsComponent } from './pages/movie/movie-details/movie-details.component';
+import { LoginGuard } from './core/guards/login.guard';
+import { MovieItemGuard } from './core/guards/movie-item.guard';
+import { MoviesGuard } from './core/guards/movies.guard';
+import { MovieDetailResolver } from './core/resolvers/movie-detail.resolver';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup-step1', component: SignupStep1Component },
-  { path: 'signup-step2', component: SignupStep2Component},
-  { path: 'movies/:id', component: MovieDetailsComponent },
-  { path: 'movies', component: MovieListComponent },
+  { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+  { path: 'login', loadChildren: () => import('./pages/login/login/login.module').then(m => m.LoginModule), canActivate: [LoginGuard] },
+  { path: 'signup-step1', loadChildren: () => import('./pages/signup-step1/signup-step1.module').then(m => m.SignupStep1Module) },
+  { path: 'signup-step2', loadChildren: () => import('./pages/signup-step2/signup-step2.module').then(m => m.SignupStep2Module) },
+  { path: 'movies/:id', loadChildren: () => import('./pages/movie/movie-details/movie-details.module').then(m => m.MovieDetailsModule), canActivate: [MovieItemGuard], resolve: { movie: MovieDetailResolver } },
+  { path: 'movies', loadChildren: () => import('./pages/movie/movie-list/movie-list.module').then(m => m.MovieListModule), canActivate: [MoviesGuard] },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

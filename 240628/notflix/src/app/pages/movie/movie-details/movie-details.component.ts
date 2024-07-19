@@ -21,20 +21,16 @@ export class MovieDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const movieId = this.route.snapshot.paramMap.get('id');
-    if (movieId) {
-      this.movieService.getMovieDetails(movieId).subscribe((movie: Movie) => {
-        this.movie = movie;
-        console.log('Movie Details: ', this.movie);
-        console.log('Backdrop URL: ', this.getBackdropUrl(this.movie.backdrop_path));
-      });
+    this.route.data.subscribe(data => {
+      this.movie = data['movie'];
+      console.log('Resolved Movie Details: ', this.movie);
 
-      this.movieService.getMovieCredits(movieId).subscribe((credits: Cast[]) => {
+      this.movieService.getMovieCredits(this.movie.id.toString()).subscribe((credits: Cast[]) => {
         this.cast = credits;
         console.log('Credits: ', this.cast);
       });
 
-      this.movieService.getMovieVideos(movieId).subscribe((videos: any[]) => {
+      this.movieService.getMovieVideos(this.movie.id.toString()).subscribe((videos: any[]) => {
         const trailer = videos.find(video => video.type === 'Trailer' && video.site === 'YouTube');
         if (trailer) {
           this.trailerUrl = trailer.key;
@@ -42,11 +38,11 @@ export class MovieDetailsComponent implements OnInit {
         console.log('Trailer URL: ', this.trailerUrl);
       });
 
-      this.movieService.getMoviePosters(movieId).subscribe((posters: Poster[]) => {
+      this.movieService.getMoviePosters(this.movie.id.toString()).subscribe((posters: Poster[]) => {
         this.posters = posters;
         console.log('Posters: ', this.posters);
       });
-    }
+    });
   }
 
   getBackdropUrl(path: string): string {

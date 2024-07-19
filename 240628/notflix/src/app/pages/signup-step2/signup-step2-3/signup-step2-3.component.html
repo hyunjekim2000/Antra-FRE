@@ -1,0 +1,21 @@
+<div class="signup-container">
+  <h1>Choose Your Plan</h1>
+  <p>Select a plan that suits you best. You can change or cancel anytime.</p>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="plan-group">
+      <div class="plan" *ngFor="let plan of plans">
+        <input
+          type="radio"
+          id="{{ plan.value }}"
+          formControlName="plan"
+          [value]="plan.value"
+        />
+        <label for="{{ plan.value }}">{{ plan.label }}</label>
+      </div>
+      <div *ngIf="form.get('plan')!.invalid && form.get('plan')!.touched" class="error">
+        Selecting a plan is required
+      </div>
+    </div>
+    <button type="submit" [disabled]="form.invalid">Next</button>
+  </form>
+</div>

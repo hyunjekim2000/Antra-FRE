@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MovieItemComponent {
   @Input() movie!: Movie;
+  isLoading = false;
 
   constructor(private router: Router) {}
 
@@ -17,6 +18,7 @@ export class MovieItemComponent {
   }
 
   goToDetails(id: number): void {
+    this.isLoading = true;
     this.router.navigate(['/movies', id.toString()]);
   }
 }
